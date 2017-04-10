@@ -4,6 +4,9 @@ public class PartData {
     private String partId;
     private String description;
 
+    public PartData() {
+    }
+
     public PartData(String partId, String description) {
         this.partId = partId;
         this.description = description;
