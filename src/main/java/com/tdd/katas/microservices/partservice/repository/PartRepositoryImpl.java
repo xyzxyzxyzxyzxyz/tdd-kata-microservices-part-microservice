@@ -12,13 +12,22 @@ public class PartRepositoryImpl implements PartRepository {
 
     private Map<String,List<PartData>> map = new HashMap<>();
 
-    void store(String vin, List<PartData> partDataList) {
+    @Override
+    public List<PartData> getPartDataList(String vin) {
+        return map.get(vin);
+    }
+
+    @Override
+    public void createPartDataList(String vin, List<PartData> partDataList) throws IllegalStateException {
+        if (map.containsKey(vin)) {
+            throw new IllegalStateException("Repository already contains a PartData list with VIN: ["+vin+"]");
+        }
         map.put(vin, partDataList);
     }
 
     @Override
-    public List<PartData> getPartDataList(String vin) {
-        return map.get(vin);
+    public void deleteAllPartDataLists() {
+        map.clear();
     }
 
 }
